@@ -19,10 +19,23 @@
         <li><a href="./about.html" class="active">About</a></li>
         <li><a href="../projects/projects.html">Projects</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme">
-        <i class="far fa-moon moon-icon"></i>
-        <i class="far fa-sun sun-icon"></i>
-      </button>
+      <div class="header-controls">
+        <div class="language-selector">
+          <button class="language-toggle" aria-label="Change language">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="language-dropdown">
+            <a href="#" data-lang="en">English</a>
+            <a href="#" data-lang="pt">Português</a>
+            <a href="#" data-lang="es">Español</a>
+          </div>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle theme">
+          <i class="far fa-moon moon-icon"></i>
+          <i class="far fa-sun sun-icon"></i>
+        </button>
+      </div>
     </nav>
   </header>
 
