@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('theme', newTheme);
   });
 });
+
 // Language switcher
 const languageToggle = document.querySelector('.language-toggle');
 const languageDropdown = document.querySelector('.language-dropdown');
