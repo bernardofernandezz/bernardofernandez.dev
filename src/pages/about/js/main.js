@@ -76,7 +76,7 @@ function translatePage(lang) {
       aboutTitle: 'Software Engineer who loves talk about tech, games and biotech',
       aboutText1: 'My name is Bernardo Fernandez, I\'m a software engineer and i have 15 years old. I\'m from Salvador, Bahia, Brazil. I\'m on High School and also do a technician in Biotechnology on Senai Cimatec. I\'m a passionate about technology and i love the idea of fix problems and create solutions using code.',
       aboutText2: 'Additionally, I\'m currently working as a IT Assistant on Amara Net Zero. There, i improve my skills and learn more about the technology and software development.',
-      funFact: '⚡️ Fun fact: I don\'t like coffee and i love watch animes.',
+      funFact: '⚡️ Fun fact: I\'m not a big fan of coffee and i love watch animes.',
 
       // Preferences section
       music: 'Music',
@@ -87,7 +87,6 @@ function translatePage(lang) {
       // Career section
       career: 'Career',
       itAssistant: 'IT Assistant',
-      remote: 'Remote',
       present: 'Present',
 
       // Footer
@@ -110,7 +109,7 @@ function translatePage(lang) {
       aboutTitle: 'Engenheiro de Software que ama falar sobre tecnologia, jogos e biotecnologia',
       aboutText1: 'Meu nome é Bernardo Fernandez, sou engenheiro de software e tenho 15 anos. Sou de Salvador, Bahia, Brasil. Estou no Ensino Médio e também faço técnico em Biotecnologia no Senai Cimatec. Sou apaixonado por tecnologia e amo a ideia de resolver problemas e criar soluções usando código.',
       aboutText2: 'Além disso, atualmente trabalho como Assistente de TI na Amara Net Zero. Lá, aprimoro minhas habilidades e aprendo mais sobre tecnologia e desenvolvimento de software.',
-      funFact: '⚡️ Fato curioso: Não gosto de café e amo assistir animes.',
+      funFact: '⚡️ Fato curioso: Não sou um grande fã de café e amo assistir animes.',
 
       // Preferences section
       music: 'Música',
@@ -121,7 +120,6 @@ function translatePage(lang) {
       // Career section
       career: 'Carreira',
       itAssistant: 'Assistente de TI',
-      remote: 'Remoto',
       present: 'Presente',
 
       // Footer
@@ -144,7 +142,7 @@ function translatePage(lang) {
       aboutTitle: 'Ingeniero de Software que ama hablar de tecnología, juegos y biotecnología',
       aboutText1: 'Mi nombre es Bernardo Fernandez, soy ingeniero de software y tengo 15 años. Soy de Salvador, Bahía, Brasil. Estoy en la escuela secundaria y también estudio técnico en Biotecnología en Senai Cimatec. Me apasiona la tecnología y me encanta la idea de resolver problemas y crear soluciones usando código.',
       aboutText2: 'Además, actualmente trabajo como Asistente de TI en Amara Net Zero. Allí, mejoro mis habilidades y aprendo más sobre tecnología y desarrollo de software.',
-      funFact: '⚡️ Dato curioso: No me gusta el café y amo ver anime.',
+      funFact: '⚡️ Dato curioso: No soy un gran fan de café y amo ver anime.',
 
       // Preferences section
       music: 'Música',
@@ -155,7 +153,6 @@ function translatePage(lang) {
       // Career section
       career: 'Carrera',
       itAssistant: 'Asistente de TI',
-      remote: 'Remoto',
       present: 'Presente',
 
       // Footer
@@ -209,7 +206,7 @@ function translatePage(lang) {
 
   if (careerTitle) careerTitle.textContent = translations[lang].career;
   if (jobTitle) jobTitle.textContent = translations[lang].itAssistant;
-  if (jobLocation) jobLocation.textContent = `Amara Net Zero · ${translations[lang].remote}`;
+  if (jobLocation) jobLocation.textContent = `Amara Net Zero `;
 
   // Update footer
   const copyright = document.querySelector('.footer-container p');
