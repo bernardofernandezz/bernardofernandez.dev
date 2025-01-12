@@ -19,10 +19,23 @@
         <li><a href="./about.html" class="active">About</a></li>
         <li><a href="../projects/projects.html">Projects</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme">
-        <i class="far fa-moon moon-icon"></i>
-        <i class="far fa-sun sun-icon"></i>
-      </button>
+      <div class="header-controls">
+        <div class="language-selector">
+          <button class="language-toggle" aria-label="Change language">
+            <i class="fas fa-globe"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="language-dropdown">
+            <a href="#" data-lang="en">English</a>
+            <a href="#" data-lang="pt">Português</a>
+            <a href="#" data-lang="es">Español</a>
+          </div>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle theme">
+          <i class="far fa-moon moon-icon"></i>
+          <i class="far fa-sun sun-icon"></i>
+        </button>
+      </div>
     </nav>
   </header>
 
@@ -43,7 +56,7 @@
               learn
               more about the technology and software development.</p>
 
-            <p class="fun-fact">⚡️ Fun fact: I don't like coffee and i love watch animes.</p>
+            <p class="fun-fact">⚡️ Fun fact: I'm not a big fan of coffee and i love watch animes.</p>
           </div>
           <div class="intro-image">
             <img src="./assets/foto-portfolio.png" alt="Profile Photo">
@@ -65,9 +78,16 @@
         </div>
 
         <div class="pref-item">
-          <i class="fa-solid fa-code"></i>
+          <i class="fas fa-code"></i>
           <h4>Stacks</h4>
-          <p>The Lion King</p>
+          <div class="stack-icons">
+            <i class="fab fa-html5" title="HTML5"></i>
+            <i class="fab fa-css3-alt" title="CSS3"></i>
+            <i class="fab fa-js" title="JavaScript"></i>
+            <!-- <i class="fab fa-react" title="React"></i> -->
+            <i class="fab fa-python" title="Python"></i>
+            <i class="fab fa-git-alt" title="Git"></i>
+          </div>
         </div>
 
         <div class="pref-item">
@@ -82,7 +102,7 @@
 
         <div class="job">
           <h3>IT Assistant</h3>
-          <p>Amara Net Zero · Remote</p>
+          <p>Amara Net Zero</p>
           <p class="date">December 2023 - Present</p>
         </div>
       </div>
@@ -94,15 +114,15 @@
       <div class="footer-content">
         <p>© 2025 Bernardo Fernandez. All rights reserved.</p>
         <div class="social-links">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/bernardofernandez" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-github"></i>
           </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer">
+          <a href="https://linkedin.com/in/bernardofernandezz" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-linkedin"></i>
           </a>
-          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
+          <!-- <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-twitter"></i>
-          </a>
+          </a> -->
         </div>
       </div>
     </div>

@@ -1,10 +1,10 @@
 const CLIENT_ID = '2209647ec74e44d1b4c365560c408de2';
 const REDIRECT_URI = 'http://localhost:3000/callback';
 const SCOPES = 'user-read-currently-playing';
-const CLIENT_SECRET = 'seu_client_secret_aqui';
+const CLIENT_SECRET = '5aa012c30e134f12a0a5ceb697b8cede';
 
 async function getCurrentlyPlaying() {
-  const token = localStorage.getItem('spotify_token');
+  const token = localStorage.getItem('BQBFiGVTR07vekCsLbTCAkI6DdsaxXjgzgx3bRtJtXNPcKV9WU9txL3Rs8mWTzV7Vf1o5ilBooRZ2Q1QwDc5XzFCFMNMVyAZtRToTVYSULeIA3sVQVA');
   if (!token) return null;
 
   try {
