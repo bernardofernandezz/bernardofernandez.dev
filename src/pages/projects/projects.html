@@ -1,14 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>bernardofernandez | Projects</title>
+  <link rel="stylesheet" href="css/projects.css">
+  <!-- Add Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body>
+<body class="bg-background text-foreground">
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav-container">
+      <div class="logo">bernardoDev</div>
+      <ul class="nav-links">
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../about/about.html">About</a></li>
+        <li><a href="./projects.html" class="active">Projects</a></li>
+      </ul>
+      <div class="header-controls">
+        <div class="language-selector">
+          <button class="language-toggle" aria-label="Change language">
+            <i class="fa-solid fa-language"></i>
+            <span class="current-lang">EN</span>
+          </button>
+          <div class="language-dropdown">
+            <a href="#" data-lang="en">English</a>
+            <a href="#" data-lang="pt">Português</a>
+            <a href="#" data-lang="es">Español</a>
+          </div>
+        </div>
+        <button class="theme-toggle" aria-label="Toggle theme">
+          <i class="far fa-moon moon-icon"></i>
+          <i class="far fa-sun sun-icon"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+  <!-- Main Content -->
+  <main class="container">
+    <header class="projects-header">
+      <h1 class="title">Projects</h1>
+      <p class="subtitle">Explore my portfolio of projects spanning from 2021 to 2024.</p>
 
+      <div class="filters-container">
+        <div class="year-filters">
+          <button class="btn btn-primary" data-year="all">All</button>
+          <button class="btn btn-outline" data-year="2024">2024</button>
+          <!-- <button class="btn btn-outline" data-year="2023">2023</button>
+          <button class="btn btn-outline" data-year="2022">2022</button>
+          <button class="btn btn-outline" data-year="2021">2021</button> -->
+        </div>
+
+        <div class="search-container">
+          <i class="fas fa-search search-icon"></i>
+          <input type="text" class="search-input" placeholder="Search projects...">
+        </div>
+      </div>
+    </header>
+
+    <div class="projects-grid" id="projectsGrid">
+      <!-- Projects will be dynamically inserted here -->
+    </div>
+  </main>
+  <script src="js/projects.js"></script>
 </body>
 
 </html>
