@@ -11,21 +11,22 @@ const PORT = process.env.PORT || 3000;
 const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
 console.log('Origens permitidas:', allowedOrigins);
 
-// Configuração CORS alternativa
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-  }
-  
-  if (req.method === 'OPTIONS') {
-    return res.sendStatus(200);
-  }
-  next();
-});
+// Configuração CORS
+app.use(cors({
+  origin: function(origin, callback) {
+    // Permitir requisições sem origin (como apps mobile)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.indexOf(origin) === -1) {
+      console.log('Origin bloqueada:', origin);
+      return callback(new Error('Origin não permitida'), false);
+    }
+    return callback(null, true);
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: true,
+  optionsSuccessStatus: 200
+}));
 
 app.use(express.json());
 
@@ -37,7 +38,7 @@ let db;
       filename: './database.sqlite',
       driver: sqlite3.Database
     });
-    
+
     // Criar tabela de tokens se não existir
     await db.exec(`
       CREATE TABLE IF NOT EXISTS tokens (
@@ -53,7 +54,7 @@ let db;
   }
 })();
 
-// Middleware para logging melhorado
+// Middleware para debug
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path} - Origin: ${req.headers.origin}`);
   next();
@@ -63,11 +64,11 @@ app.use((req, res, next) => {
 app.get('/login', (req, res) => {
   const scope = 'user-read-currently-playing user-read-playback-state';
   const state = Math.random().toString(36).substring(7);
-  
+
   // Salvar state para validação posterior
   req.session = req.session || {};
   req.session.spotifyState = state;
-  
+
   const authorizeURL = 'https://accounts.spotify.com/authorize?' +
     new URLSearchParams({
       response_type: 'code',
@@ -77,7 +78,7 @@ app.get('/login', (req, res) => {
       state: state,
       show_dialog: true // Força mostrar diálogo de autorização
     }).toString();
-  
+
   console.log('Redirecionando para autorização do Spotify:', authorizeURL);
   res.redirect(authorizeURL);
 });
@@ -85,7 +86,7 @@ app.get('/login', (req, res) => {
 // Callback do Spotify
 app.get('/callback', async (req, res) => {
   const { code, state, error } = req.query;
-  
+
   console.log('Callback recebida:', {
     code: code ? 'presente' : 'ausente',
     state: state ? 'presente' : 'ausente',
@@ -104,7 +105,7 @@ app.get('/callback', async (req, res) => {
 
   try {
     console.log('Iniciando troca de código por token...');
-    const response = await axios.post('https://accounts.spotify.com/api/token', 
+    const response = await axios.post('https://accounts.spotify.com/api/token',
       new URLSearchParams({
         code: code,
         redirect_uri: process.env.REDIRECT_URI,
@@ -143,7 +144,7 @@ app.get('/callback', async (req, res) => {
 app.get('/token', async (req, res) => {
   try {
     const tokens = await db.get('SELECT * FROM tokens WHERE id = 1');
-    
+
     if (!tokens || !tokens.access_token) {
       return res.status(401).json({ error: 'Não autenticado' });
     }
@@ -174,7 +175,7 @@ app.get('/token', async (req, res) => {
 
         // Atualizar tokens no banco de dados
         await db.run(`
-          UPDATE tokens 
+          UPDATE tokens
           SET access_token = ?, refresh_token = ?, expires_at = ?
           WHERE id = 1
         `, [newTokens.access_token, newTokens.refresh_token, newTokens.expires_at]);
