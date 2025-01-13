@@ -1,3 +1,4 @@
+// Importar o módulo do Spotify
 import { initSpotify } from './spotify.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('theme', newTheme);
   });
 
-  // Inicializar Spotify
+  // Inicializar o Spotify
   initSpotify();
 });
 

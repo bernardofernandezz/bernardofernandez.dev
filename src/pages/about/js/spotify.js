@@ -5,17 +5,49 @@ export function initSpotify() {
   const artistName = document.getElementById('artist-name');
   const spotifyLink = document.getElementById('spotify-link');
 
+  // Função para testar a conexão com o backend
+  async function testBackendConnection() {
+    try {
+      const response = await fetch(`${BACKEND_URL}/test`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log('Backend connection test:', data);
+      return true;
+    } catch (error) {
+      console.error('Backend connection test failed:', error);
+      return false;
+    }
+  }
+
   async function getToken() {
     try {
-      const response = await fetch(`${BACKEND_URL}/token`);
-      if (!response.ok) {
-        window.location.href = `${BACKEND_URL}/login`;
-        return null;
+      const isBackendAvailable = await testBackendConnection();
+      if (!isBackendAvailable) {
+        throw new Error('Backend não está disponível');
       }
+
+      const response = await fetch(`${BACKEND_URL}/token`, {
+        credentials: 'include'
+      });
+      
+      if (!response.ok) {
+        if (response.status === 401) {
+          console.log('Iniciando processo de autenticação...');
+          sessionStorage.setItem('spotify_redirect', window.location.href);
+          window.location.href = `${BACKEND_URL}/login`;
+          return null;
+        }
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
       return data.access_token;
     } catch (error) {
       console.error('Erro ao obter token:', error);
+      trackName.textContent = 'Erro de conexão';
+      artistName.textContent = 'Verifique se o servidor está rodando';
       return null;
     }
   }
@@ -32,7 +64,12 @@ export function initSpotify() {
       });
 
       if (response.status === 204) {
+        console.log('Nenhuma música tocando no momento');
         return null;
+      }
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
@@ -55,7 +92,7 @@ export function initSpotify() {
         artistName.textContent = data.item.artists.map(artist => artist.name).join(', ');
         spotifyLink.href = data.item.external_urls.spotify;
       } else {
-        trackName.textContent = 'Lofi';
+        trackName.textContent = 'Nenhuma música tocando';
         artistName.textContent = '';
         spotifyLink.href = '#';
       }
@@ -65,9 +102,15 @@ export function initSpotify() {
   // Verificar parâmetros de URL após autenticação
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get('auth') === 'success') {
+    console.log('Autenticação bem-sucedida!');
     updateNowPlaying();
-    // Limpar parâmetros da URL
-    window.history.replaceState({}, document.title, window.location.pathname);
+    // Limpar parâmetros da URL mantendo o histórico
+    const newUrl = window.location.pathname;
+    window.history.pushState({}, document.title, newUrl);
+  } else if (urlParams.get('auth') === 'error') {
+    console.error('Erro na autenticação do Spotify:', urlParams.get('reason'));
+    trackName.textContent = 'Erro na autenticação';
+    artistName.textContent = 'Tente novamente mais tarde';
   }
 
   // Atualizar a cada 30 segundos
