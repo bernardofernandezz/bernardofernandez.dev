@@ -551,3 +551,49 @@ body {
   color: var(--foreground);
   transform: translateY(-2px);
 }
+
+#spotify-status {
+  margin-top: 0.5rem;
+}
+
+#spotify-link {
+  text-decoration: none;
+  color: var(--muted-foreground);
+  transition: color 0.2s ease;
+}
+
+#spotify-link:hover {
+  color: var(--foreground);
+}
+
+#track-name {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.artist-name {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.playing-animation {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-right: 0.5rem;
+}
+
+.playing-animation span {
+  width: 3px;
+  height: 12px;
+  background-color: var(--foreground);
+  border-radius: 3px;
+  animation: soundBars 1.2s ease infinite;
+}
+
+.playing-animation span:nth-child(2) { animation-delay: 0.2s; }
+.playing-animation span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes soundBars {
+  0%, 100% { transform: scaleY(0.5); }
+  50% { transform: scaleY(1); }
+}
