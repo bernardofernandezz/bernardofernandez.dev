@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+.env
+
+# Database
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db 

@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: spotify-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
+    envVars:
+      - key: SPOTIFY_CLIENT_ID
+        sync: false
+      - key: SPOTIFY_CLIENT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        value: "https://seuusername.github.io/seurepo/src/pages/about/about.html"
+      - key: REDIRECT_URI
+        value: "https://seu-backend.onrender.com/callback"
+      - key: ALLOWED_ORIGINS
+        value: "https://seuusername.github.io" 

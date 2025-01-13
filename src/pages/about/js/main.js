@@ -1,3 +1,6 @@
+// Importar o módulo do Spotify
+import { initSpotify } from './spotify.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggle = document.querySelector('.theme-toggle');
 
@@ -21,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('theme', newTheme);
   });
+
+  // Inicializar o Spotify
+  initSpotify();
 });
 
 // Language switcher
