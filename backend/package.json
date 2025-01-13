@@ -7,7 +7,11 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "lint": "eslint .",
+    "test": "echo \"No tests specified\" && exit 0",
+    "clean": "rm -f database.sqlite && rm -rf node_modules",
+    "prepare": "npm install"
   },
   "dependencies": {
     "axios": "^1.6.7",
@@ -18,6 +22,7 @@
     "sqlite": "^5.1.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "eslint": "^8.57.0"
   }
 }

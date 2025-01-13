@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: spotify-backend
+    name: bernardofernandezdev
     env: node
     buildCommand: cd backend && npm install
     startCommand: cd backend && node server.js
@@ -10,8 +10,8 @@ services:
       - key: SPOTIFY_CLIENT_SECRET
         sync: false
       - key: FRONTEND_URL
-        value: "https://seuusername.github.io/seurepo/src/pages/about/about.html"
+        value: "https://bernardofernandez.github.io/bernardofernandezdev/pages/about/about.html"
       - key: REDIRECT_URI
-        value: "https://seu-backend.onrender.com/callback"
+        value: "https://bernardofernandezdev.onrender.com/callback"
       - key: ALLOWED_ORIGINS
-        value: "https://seuusername.github.io" 
+        value: "https://bernardofernandez.github.io"
