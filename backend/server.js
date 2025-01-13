@@ -12,23 +12,17 @@ const allowedOrigins = process.env.ALLOWED_ORIGINS.split(',');
 console.log('Origens permitidas:', allowedOrigins);
 
 // Configuração CORS
-app.use(cors({
-  origin: function(origin, callback) {
-    // Permitir requests sem origin (como Postman)
-    if (!origin) return callback(null, true);
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://bernardofernandezz.github.io');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, Origin');
+  res.header('Access-Control-Allow-Credentials', 'true');
 
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.log('Origin bloqueada:', origin);
-      callback(new Error('Origin não permitida pelo CORS'));
-    }
-  },
-  credentials: true,
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin'],
-  optionsSuccessStatus: 200
-}));
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  next();
+});
 
 app.use(express.json());
 
