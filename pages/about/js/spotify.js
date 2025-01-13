@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:3000';
+const BACKEND_URL = 'https://bernardofernandezdev.onrender.com';
 
 export function initSpotify() {
   const trackName = document.getElementById('track-name');
