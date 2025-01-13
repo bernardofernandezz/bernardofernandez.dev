@@ -14,17 +14,19 @@ console.log('Origens permitidas:', allowedOrigins);
 // Configuração CORS
 app.use(cors({
   origin: function(origin, callback) {
-    // Permitir requisições sem origin (como apps mobile)
+    // Permitir requests sem origin (como Postman)
     if (!origin) return callback(null, true);
 
-    if (allowedOrigins.indexOf(origin) === -1) {
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
       console.log('Origin bloqueada:', origin);
-      return callback(new Error('Origin não permitida'), false);
+      callback(new Error('Origin não permitida pelo CORS'));
     }
-    return callback(null, true);
   },
-  methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin'],
   optionsSuccessStatus: 200
 }));
 
@@ -56,7 +58,9 @@ let db;
 
 // Middleware para debug
 app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path} - Origin: ${req.headers.origin}`);
+  console.log(`${req.method} ${req.path}`);
+  console.log('Origin:', req.headers.origin);
+  console.log('Headers:', req.headers);
   next();
 });
 
@@ -199,7 +203,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  res.json({ status: 'ok', message: 'Servidor está funcionando' });
+  res.json({
+    status: 'ok',
+    message: 'Backend está funcionando',
+    origin: req.headers.origin
+  });
 });
 
 app.listen(PORT, () => {
