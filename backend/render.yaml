@@ -10,8 +10,8 @@ services:
       - key: SPOTIFY_CLIENT_SECRET
         sync: false
       - key: FRONTEND_URL
-        value: "https://bernardofernandez.github.io/bernardofernandezdev/pages/about/about.html"
+        value: "https://bernardofernandezz.github.io/bernardofernandez.dev/pages/about/about.html"
       - key: REDIRECT_URI
         value: "https://bernardofernandezdev.onrender.com/callback"
       - key: ALLOWED_ORIGINS
-        value: "https://bernardofernandez.github.io"
+        value: "https://bernardofernandezz.github.io"
