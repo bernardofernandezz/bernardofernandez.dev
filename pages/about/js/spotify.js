@@ -1,4 +1,4 @@
-const BACKEND_URL = 'https://bernardofernandez-backend-rifwtb92d.vercel.app';
+const BACKEND_URL = 'https://bernardofernandez-backend-23c16a7n8.vercel.app';
 
 export function initSpotify() {
   const trackName = document.getElementById('track-name');
@@ -7,21 +7,22 @@ export function initSpotify() {
 
   async function testBackendConnection() {
     try {
+      console.log('Testando conexão com:', BACKEND_URL);
       const response = await fetch(`${BACKEND_URL}/test`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json'
-        }
+        },
+        mode: 'cors'
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      console.log('Status da resposta:', response.status);
       const data = await response.json();
-      console.log('Backend connection test:', data);
+      console.log('Dados recebidos:', data);
+
       return true;
     } catch (error) {
-      console.error('Backend connection test failed:', error);
+      console.error('Erro na conexão:', error);
       return false;
     }
   }
