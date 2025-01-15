@@ -1,35 +1,59 @@
-const express = require('express');
-const cors = require('cors');
-const axios = require('axios');
-require('dotenv').config();
+const fastify = require('fastify')();
+const PORT = process.env.PORT || 3000;
 
-const app = express();
+// Middleware para log
+fastify.addHook('onRequest', (request, reply, done) => {
+  console.log(
+    `Server start: ${request.method} ${request.url} - Origin: ${request.headers.origin}`
+  );
+  done();
+});
 
-// Configuração CORS mais permissiva para testes
-app.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
-  credentials: true
-}));
-
-// Middleware para logging
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path} - Origin: ${req.headers.origin}`);
-  next();
+// Rota raiz
+fastify.get('/', async (request, reply) => {
+  return {
+    status: 'ok',
+    message: 'Servidor está online',
+    endpoints: {
+      test: '/test',
+      spotify: '/spotify/now-playing',
+    },
+  };
 });
 
 // Rota de teste
-app.get('/test', (req, res) => {
-  res.json({
+fastify.get('/test', async (request, reply) => {
+  return {
     status: 'ok',
-    message: 'Backend está funcionando'
-  });
+    message: 'Backend funcionando!',
+    timestamp: new Date().toISOString(),
+  };
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+// Rota do Spotify
+fastify.get('/spotify/now-playing', async (request, reply) => {
+  try {
+    // Simulação de dados do Spotify
+    const nowPlayingData = {
+      track: 'Shape of You',
+      artist: 'Ed Sheeran',
+      link: 'https://open.spotify.com/track/7qiZfU4dY1lWllzX7mPBI3',
+      isPlaying: true,
+      timestamp: new Date().toISOString(),
+    };
+    return nowPlayingData;
+  } catch (error) {
+    console.error('Erro ao buscar dados do Spotify:', error);
+    reply.status(500).send({
+      error: 'Erro ao buscar informações do Spotify',
+      details: error.message,
+    });
+  }
 });
 
-module.exports = app;
+// Iniciar servidor (apenas uma vez)
+fastify.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
+
+module.exports = fastify;
