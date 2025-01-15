@@ -10,9 +10,6 @@ export function initSpotify() {
       console.log('Testando conexão com:', BACKEND_URL);
       const response = await fetch(`${BACKEND_URL}/test`, {
         method: 'GET',
-        headers: {
-          'Accept': 'application/json'
-        },
         mode: 'cors'
       });
 
